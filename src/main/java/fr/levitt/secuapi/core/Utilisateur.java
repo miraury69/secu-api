@@ -1,12 +1,14 @@
 package fr.levitt.secuapi.core;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Utilisateur {
 
     @Id
+    @GeneratedValue
     private int idUtilisateur;
     private String nom;
     private String prenom;
