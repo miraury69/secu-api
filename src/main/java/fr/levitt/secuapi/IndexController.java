@@ -1,6 +1,10 @@
 package fr.levitt.secuapi;
 
+import fr.levitt.secuapi.core.Chambre;
+import fr.levitt.secuapi.core.Reservation;
 import fr.levitt.secuapi.core.Utilisateur;
+import fr.levitt.secuapi.sql.ChambreRepository;
+import fr.levitt.secuapi.sql.ReservationRepository;
 import fr.levitt.secuapi.sql.UtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;;
+
 
 @RestController
 public class IndexController {
@@ -16,15 +20,16 @@ public class IndexController {
 
     @Autowired
     private UtilisateurRepository utilisateurRepository;
+    @Autowired
+    private ChambreRepository chambreRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
 
     @GetMapping("/newUser")
     public void addRandomUser() {
         Utilisateur utilisateur = new Utilisateur();
-        Scanner nom = new Scanner(System.in);
-        System.out.println("entrez un nom : ");
-        String nomStr = nom.next();
-        utilisateur.setNom(nomStr);
+        utilisateur.setNom("Toto"+Math.random());
         utilisateur.setPrenom("Tata"+Math.random());
         utilisateurRepository.save(utilisateur);
     }
@@ -32,6 +37,16 @@ public class IndexController {
     @GetMapping("/user")
     public Iterable<Utilisateur> getUtilisateurs() {
         return utilisateurRepository.findAll();
+    }
+
+    @GetMapping("/Chambre")
+    public Iterable<Chambre> getChambre(){
+        return chambreRepository.findAll();
+    }
+
+    @GetMapping("/reservation")
+    public Iterable<Reservation> getReservation(){
+        return reservationRepository.findAll();
     }
 
     @GetMapping("/")
