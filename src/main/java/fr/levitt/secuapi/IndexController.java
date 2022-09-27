@@ -40,6 +40,7 @@ public class IndexController {
         else {
             // TODO : verifier header
             System.out.println(authorization);
+            return new ResponseEntity<>("Hello World!", HttpStatus.OK);
         }
     }
 
